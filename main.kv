@@ -1,0 +1,145 @@
+  
+# file name: main.py
+#: import GridLayout kivy.uix.gridlayout
+#: import StackLayout kivy.uix.stacklayout 
+#: import PageLayout kivy.uix.pagelayout
+#: import hex kivy.utils.get_color_from_hex
+#: import runTouchApp kivy.base
+#: import Label kivy.uix.label
+#: import Button kivy.uix.button
+#: import NumericProperty kivy.properties
+#: import ScreenManager kivy.uix.screenmanager
+#: import Screen kivy.uix.screenmanager
+#: set default_font_size "40sp"
+
+
+
+ScreenManager:
+    id: screen_manager
+	ScreenOne:
+	ScreenTwo:
+    ScreenThree:
+
+<ScreenOne>:
+	name: "ScreenOne"
+    id:one
+    GridLayout:
+        rows: 5
+        canvas:
+            Color:
+                rgba: hex('#092147')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+     
+		Image:
+            source: 'assets/icon.png'  
+        BoxLayout:
+
+            Label:
+                text: 'TWITTER ANALYZER'
+                font_size:50
+                font_name: 'Arial'    
+        BoxLayout:
+            Label:
+                text: 'An Application to Analyze Your Tweets '
+                font_size: 20
+                font_name: 'Arial'
+        #AnchorLayout:
+            #anchor_x: 'center'
+            #size_hint_x: 10
+
+  
+        Button:
+            center: self.parent.center
+            font_size: 18
+            height: 13
+            background_color: (0.97, 0.99, 0.97, 0.5)
+            text: "Continue"
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'ScreenTwo'
+
+	
+<ScreenTwo>:
+	name: "ScreenTwo"
+    id: two
+    GridLayout:   
+        rows: 5
+        canvas:
+            Color:
+                rgba: hex('#092147')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Image:
+            source: 'assets/icon.png'  
+        BoxLayout:
+
+            Label:
+                text: 'TWITTER ANALYZER'
+                font_size:50
+                font_name: 'Arial'    
+        BoxLayout:
+            Label:
+                text: 'Enter your Twitter handle without the @ '
+        #AnchorLayout:
+            #anchor_x: 'center'
+            #size_hint_x: 10
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 10
+            Label:
+                text: 'Your Twitter Handle: '
+            TextInput:
+                id: username
+                text: ''
+                multiline: False
+                           
+        Button:
+            center: self.parent.center
+            font_size: 18
+            height: 13
+            background_color: (0.97, 0.99, 0.97, 0.5)
+            text: "Analyze Tweets"
+            on_press:
+                app.username()
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'ScreenThree'
+		
+
+<ScreenThree>:
+    name: "ScreenThree"
+    id: three
+    GridLayout:   
+        rows: 5
+        canvas:
+            Color:
+                rgb: hex('#092147')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Image:
+            source: 'assets/icon.png'
+        BoxLayout:
+            Label:
+                text: 'Your Analysis'
+                font_size:50
+                font_name: 'Arial'     
+        Image:
+            source: 'analysis9.png'
+            allow_stretch: True
+            size_hint_y: None
+            height: dp(250)
+        BoxLayout:
+            Label:
+                text: ''  
+        Button:
+            center: self.parent.center
+            font_size: 18
+            height: 13
+            background_color: (0.97, 0.99, 0.97, 0.5)
+            text: "Back to Main Page"
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'ScreenOne'
